@@ -73,4 +73,30 @@ public class Dashboard {
     public void ordenarPorMemoria() {
         Collections.sort(widgets);
     }
+
+    public ArrayList<Renderizable> buscar(String consulta) {
+    ArrayList<Renderizable> encontrados =
+            new ArrayList<Renderizable>();
+
+    String texto = consulta.trim().toLowerCase();
+    int posicion = 0;
+
+    while (posicion < widgets.size()) {
+        Renderizable actual = widgets.get(posicion);
+
+        boolean coincideId =
+                actual.getId().equalsIgnoreCase(texto);
+
+        boolean coincideNombre =
+                actual.getNombre().toLowerCase().contains(texto);
+
+        if (coincideId == true || coincideNombre == true) {
+            encontrados.add(actual);
+        }
+
+        posicion = posicion + 1;
+    }
+
+    return encontrados;
+}
 }
